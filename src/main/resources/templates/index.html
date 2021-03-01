@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Homepage</title>
+</head>
+<body>
+    <h1>This is your first JS exercise</h1>
+    <div>
+        <input id="inputfield" type="text">
+        <h4 hidden=true id="info">Thank you for changing the input to: Blank</h4>
+    </div>
+    <button id="btn01" onclick="clicked()">Click me</button>
+
+    <script>
+        let text = document.getElementById("inputfield").value;
+
+        function clicked() {
+            let cur_text = document.getElementById("inputfield").value;
+            if (cur_text===text) {
+                oldInput();
+            } else if (cur_text==="Change Me!") {
+                oldInput()
+            } else {
+                newInput()
+            }
+        }
+
+        function newInput() {
+            document.getElementById("info").hidden = false;
+            document.getElementById("btn01").innerText = "Click Me Again!";
+            document.getElementById("info").innerText = "Thank you for changing the input to:"+document.getElementById("inputfield").value;
+        }
+
+        function oldInput() {
+            document.getElementById("inputfield").value = "Change Me!"
+            document.getElementById("btn01").innerText = "Change text above and click me again!"
+        }
+    </script>
+</body>
+</html>
