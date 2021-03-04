@@ -13,28 +13,29 @@
     <button id="btn01" onclick="clicked()">Click me</button>
 
     <script>
-        let text = document.getElementById("inputfield").value;
-
         function clicked() {
-            let cur_text = document.getElementById("inputfield").value;
-            if (cur_text===text) {
+            if (sessionStorage.getItem("old_text")===""&&document.getElementById("inputfield").value===null||
+                sessionStorage.getItem("old_text")===""&&document.getElementById("inputfield").value==="") {
+                alert("Empty...")
                 oldInput();
-            } else if (cur_text==="Change Me!") {
-                oldInput()
+            } else if (document.getElementById("inputfield").value===sessionStorage.getItem("old_text")) {
+                alert("Repeated...")
+                oldInput();
             } else {
-                newInput()
+                newInput();
             }
         }
-
         function newInput() {
             document.getElementById("info").hidden = false;
+            document.getElementById("info").innerHTML = "Thank you for changing the input to:<b>"+document.getElementById("inputfield").value+"</b>";
             document.getElementById("btn01").innerText = "Click Me Again!";
-            document.getElementById("info").innerText = "Thank you for changing the input to:"+document.getElementById("inputfield").value;
+            sessionStorage.setItem("old_text", document.getElementById("inputfield").value);
         }
-
         function oldInput() {
-            document.getElementById("inputfield").value = "Change Me!"
-            document.getElementById("btn01").innerText = "Change text above and click me again!"
+            document.getElementById("info").hidden = true;
+            document.getElementById("inputfield").value = "Change Me!";
+            document.getElementById("btn01").innerText = "Change text above and click me again!";
+            sessionStorage.setItem("old_text", document.getElementById("inputfield").value);
         }
     </script>
 </body>
